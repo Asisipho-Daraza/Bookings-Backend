@@ -16,10 +16,10 @@ export class AdminSideController {
   constructor(private __admin: AdminSideService) {}
 
   //Search in admin data
-  // @Get('search')
-  // async searchDetails(@Req() req: Request) {
-  //   return await this.__admin.searchDetailsByName(req);
-  // }
+  @Get('search')
+  async searchDetails(@Req() req: Request) {
+    return await this.__admin.searchDetailsByName(req);
+  }
 
   //Add new detail
   @Post()

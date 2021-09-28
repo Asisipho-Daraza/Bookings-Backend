@@ -123,14 +123,28 @@ export class AdminSideService {
     return { message: `successfully deleted ${remove_phonebook.hairnailname}` };
   }
 
-  // async searchPhonebookByNameOrNumber(requset: any){
-  // 	return (await this.__phonebookModel.find({
-  // 		$or: [
-  // 			{ name: new RegExp(requset.query.s.toString(), 'i' )},
-  // 			{ email: new RegExp(requset.query.s.toString(), 'i' )},
-  // 		]
-  // 	}).sort({ name: 1 }).exec()).map((book: any) => ({ id: book.id, phone: book.phone, email: book.email, name: book.name }));
-  // }
+  async searchDetailsByName(requset: any) {
+    return (
+      await this.__adminModel
+        .find({
+          $or: [
+            { name: new RegExp(requset.query.s.toString(), 'i') },
+            { email: new RegExp(requset.query.s.toString(), 'i') },
+          ],
+        })
+        .sort({ hairnailname: 1 })
+        .exec()
+    ).map((ad: any) => ({
+      id: ad.id,
+      name: ad.name,
+      hairnailname: ad.hairnailname,
+      price: ad.price,
+      image: ad.image,
+      category: ad.category,
+      description: ad.description,
+      size: ad.size,
+    }));
+  }
 
   // async findOnePhonebookFromTheDatabase(id: string){
   // 	let phonebook: any;
