@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AdminSideService } from './admin-side.service';
 import { AdminSideController } from './admin-side.controller';
-import { Admin } from './adminModel';
+import { AdminSchema } from './adminModel';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AdminSchema } from 'src/adminBooking/admin-book/adminSchema';
+// import { AdminSchema } from 'src/adminBooking/admin-book/adminSchema';
 
 @Module({
   imports: [
