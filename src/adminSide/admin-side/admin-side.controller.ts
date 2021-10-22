@@ -47,7 +47,7 @@ export class AdminSideController {
   //Get single detail
   @Get('/:adminId')
   async GetOneDetail(@Param('adminId') adminId: string) {
-    return await this.__admin.findOneDetail(adminId);
+    return await this.__admin.findOneDetailFromDB(adminId);
   }
 
   //Update One  detail
