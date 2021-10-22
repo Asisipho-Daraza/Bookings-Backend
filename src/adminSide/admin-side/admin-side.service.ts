@@ -61,7 +61,7 @@ export class AdminSideService {
   //Get single nail or hair details
 
   async findOneDetail(adminId: string) {
-    const ad = await this.findOneDetail(adminId);
+    const ad = await this.findOneDetailFromDB(adminId);
     return {
       id: ad.id,
       name: ad.name,
@@ -77,7 +77,7 @@ export class AdminSideService {
   //Update hair/nails
 
   async updateOneHairDetail(adminId: string, new_admin: any) {
-    const current_admin = await this.findOneDetail(adminId);
+    const current_admin = await this.findOneDetailFromDB(adminId);
 
     if (new_admin.name) current_admin.name = new_admin.name;
     if (new_admin.hairnailname)
@@ -116,7 +116,7 @@ export class AdminSideService {
   //Delete one detail
 
   async deleteOneDetailsInDB(adminId: string) {
-    await this.findOneDetail(adminId);
+    await this.findOneDetailFromDB(adminId);
     const remove_phonebook = await this.__adminModel
       .findOneAndDelete({ _id: adminId })
       .exec();
@@ -146,17 +146,17 @@ export class AdminSideService {
     }));
   }
 
-  // async findOnePhonebookFromTheDatabase(id: string){
-  // 	let phonebook: any;
+  async findOneDetailFromDB(id: string) {
+    let admins: any;
 
-  // 	try {
-  // 		phonebook = await this.__phonebookModel.findOne({ _id: id});
-  // 	} catch (error) {
-  // 		throw new NotFoundException('Contact Not In Your Phonebook');
-  // 	}
+    try {
+      admins = await this.__adminModel.findOne({ _id: id });
+    } catch (error) {
+      throw new NotFoundException('Style not in the database');
+    }
 
-  // 	if (!phonebook) throw new NotFoundException('Contact Not In Your Phonebook');
+    if (!admins) throw new NotFoundException('Style not in the database');
 
-  // 	return phonebook;
-  // }
+    return admins;
+  }
 }
